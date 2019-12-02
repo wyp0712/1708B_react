@@ -83,6 +83,13 @@ module.exports = function(proxy, allowedHost) {
     public: allowedHost,
     proxy,
     before(app, server) {
+      app.get('/api/list', (req, res) => {
+        res.json({
+          errCode: 0,
+          msg: 'success'
+        })
+      })
+
       if (fs.existsSync(paths.proxySetup)) {
         // This registers user provided middleware for proxy reasons
         require(paths.proxySetup)(app);
