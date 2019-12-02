@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <!-- <div id="root" class="root">hello world</div> -->
+  
+  <script>
+
+  const box = document.getElementById('root')
+
+  // 虚拟dom的表示方法为
+  const vBox = {
+    type: 'div',
+    props: {
+      id: 'box',
+      class: 'box'
+    },
+    children: ['hello world']
+  }
+
+// vBox其实就是虚拟dom，是我们用原生的Object对象去描述一个真实dom节点的方式，该对象只有标签的一些关键属性。
+   
+  // 1. 创建虚拟dom
+  function createVirtualDom({type, props, children}) {
+     const Vdom = {
+       type,
+       props,
+       children
+     }
+     return Vdom
+  }
+
+  // 2. 根据虚拟dom生成节点
+  function creatRdom(vDom) {
+    const { type, props, children } = vDom
+    const rDom = document.createElement(type);
+    if (props) {
+      Object.keys(props).forEach(item => {
+        rDom.setAttribute(item, props[item])
+      })
+    }
+    if (children instanceof Array) {
+      children.forEach(item => {
+        if (typeof item === 'string') {
+          const text = document.createTextNode(item)
+          rDom.appendChild(text)
+        } else {
+          rDom.appendChild(creatRdom(item))
+        }
+      })
+    }
+    return rDom
+  }
+
+  creatRdom(createVirtualDom({
+    type: 'div',
+    props: {
+      id: 'root'
+    },
+    children: ['hello world']
+  })) 
+
+
+    
+
+  
+  </script>
+
+</body>
+</html>

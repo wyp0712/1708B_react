@@ -1,0 +1,29 @@
+*{
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;;
+}
+.list-active {
+  border:2px solid red;
+}
+.app-nav {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  position:sticky;
+  left: 0;
+  top: 0;
+  border-bottom:1px solid black;
+  background: #fff;
+}
+.app-nav .app-tab {
+  flex:1;
+  line-height: 35px;
+  border:1px solid black;
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+}
+.app-nav .active {
+  background: red;
+  color: #fff;
+}

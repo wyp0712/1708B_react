@@ -1,0 +1,50 @@
+*{
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;;
+}
+input {
+  outline: none;
+  border: none;
+  border:1px solid black;
+}
+.list-active {
+  border:2px solid red;
+}
+.app-nav {
+  width: 100%;
+  display: flex;
+  cursor: pointer;
+  position:sticky;
+  left: 0;
+  top: 0;
+  border-bottom:1px solid black;
+  background: #fff;
+  z-index: 2;
+}
+.app-nav .app-tab {
+  flex:1;
+  line-height: 35px;
+  border:1px solid black;
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+}
+.app-nav .active {
+  background: red;
+  color: #fff;
+}
+.list {
+  position: relative;
+}
+.list i {
+  position: absolute;
+  right: 60%;
+  top: 0;
+  background: #fff;
+  color:red;
+  width: 28px;
+  line-height: 28px;
+  background: rgba(61,63,71,.6);
+  text-align: center;
+  border-bottom-left-radius: 4px;
+}
