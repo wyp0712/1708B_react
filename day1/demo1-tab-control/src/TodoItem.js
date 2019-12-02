@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 class TodoItem extends Component {
   render() {
     return (
-      <li  
+      <li
        onClick={this.handleClick.bind(this)} 
        > {this.props.item} </li>
     )

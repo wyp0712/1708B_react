@@ -6,6 +6,7 @@ class NavMovie extends Component {
     const { item, index, activeIndex } = this.props
     return (
       <span
+        data-index="1"
         key={index}
         className={item.isTab === activeIndex ? 'app-tab active': 'app-tab'}
         onClick={this.handleTabEvent.bind(this, item)}
