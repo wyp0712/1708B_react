@@ -1,26 +1,76 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const imgs = ['/imgs/1.png', '/imgs/2.png']
+
+class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      list: [
+        {
+          name: 'vue',
+          children: [
+            {
+              title: 'vuex', 
+              price: '12'
+            },
+            {
+              title: 'vue-router', 
+              price: '22'
+            }
+          ]
+        },
+        {
+          name: 'react',
+          children: [
+            {
+              title: 'react-redux', 
+              price: '12'
+            },
+            {
+              title: 'react-router-dom', 
+              price: '22'
+            }
+          ]
+        }
+      ]
+    }
+  }
+
+  render() {
+    return (
+      <div>
+          {
+            imgs.map(val => {
+              console.log(typeof val)
+               return (<img src={val} />)
+            })
+          }
+
+
+         {
+           this.state.list.map(item => {
+             return (
+             <div> 
+               <h2>{item.name}</h2> 
+               <hr />
+               { 
+                item.children.map(val => {
+                  return <h2>{val.title}</h2>
+                })
+                }
+                </div>
+             )
+           })
+         }
+
+
+        {/* <BrowserRouter>
+        </BrowserRouter> */}
+      </div>
+    )
+  }
 }
 
 export default App;
