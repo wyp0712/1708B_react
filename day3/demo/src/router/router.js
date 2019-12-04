@@ -45,7 +45,6 @@ class RouterApp extends React.Component {
           <Route exact path='/' component={Home}></Route> 
           <Route path='/detail' component={Detail}></Route> 
 
-      
         </Switch>
       </Fragment>
     )

@@ -1,0 +1,72 @@
+.app-tab {
+  width: 100%;
+  user-select: none;
+}
+.app-tab .nav {
+  width: 100%;;
+  height: 45px;
+  text-align: center;
+  line-height: 45px;
+}
+.app-tab .active {
+  color: red;
+}
+
+.app-tab .nav span {
+  display: inline-block;;
+  width: 60px;
+  height: 100%;
+  margin: 5px;
+  border:1px solid black;
+  cursor: pointer;
+}
+
+
+
+ul {
+  width: 100%;
+}
+ul li {
+  position: relative;
+  display: flex;
+  img {
+    width: 200px;
+    height: 100px;
+  }
+}
+ul li span {
+  position: absolute;
+  width: 28px;
+  line-height: 28px;
+  background: rgba(61,63,71,.6);
+  text-align: center;
+  display: inline-block;
+  left: 33%;
+}
+.dialog {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left:0;
+  top:0;
+  z-index: 2;
+  
+  .mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left:0;
+    top:0;
+    background: #000;
+    opacity: .6;
+  }
+  .tip {
+    width: 80%;
+    height: 60%;
+    background: #fff;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+  }
+}
