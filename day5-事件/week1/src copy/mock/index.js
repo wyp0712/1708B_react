@@ -4,7 +4,7 @@ import Mock from 'mockjs' // es6模块化
 
 // const querystring = require('querystring') // 查询字符串  commonJS 包
 
-import qs from 'qs'
+// import qs from 'qs'
 
 // qs.parse()
 // qs.stringify()
@@ -23,12 +23,12 @@ const data = Mock.mock({
     }]
   })
 // console.log(data, 'list')    
-Mock.mock(/\.*/, function(options) {
-  // console.log(querystring.parse(options.url.split('?')[1]), 'options')
-  console.log(qs.parse(options.url.split('?')[1]), 'options')
+// Mock.mock(/\.*/, function(options) {
+//   // console.log(querystring.parse(options.url.split('?')[1]), 'options')
+//   // console.log(qs.parse(options.url.split('?')[1]), 'options')
 
-  return data
-})
+//   return data
+// })
 
 // Mock.mock('/api/list','post', function(options) {
 //   console.log(JSON.parse(options.body), 'options')

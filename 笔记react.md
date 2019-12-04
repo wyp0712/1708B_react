@@ -186,12 +186,62 @@ componentWillUnmount() // 在组件从 DOM 中移除之前立刻被调用。 事
       console.log(qs.parse(res.url.split('?')[1]), 'res')
     })
     Mock.mock('/api/tab', tabData)
+
 # qs 是一个增加了一些安全性的查询字符串解析和序列化字符串的库。
 
   qs.parse()
   qs.stringify()
 
 
-# ref 
-# reactDom.findDOMNode
-# children   弹框
+# ref  操作dom
+
+  ## 在DOM元素上使用ref 
+   ref接收一个回调函数作为值，在组件被挂载或卸载时候，回调函数会被调用，
+  1. 在组件被挂载时，回调函数会接收当前DOM元素作为参数；
+  2. 在组件被卸载时候，回调函数会接收null作为参数；
+  
+  ## 在组件上使用ref  获取组件实例
+   ref的回调函数接收的参数是当前-组件的实例-，这提供了一种在组件外部操作组件的方式。
+
+
+  ## 注意： 
+  新版本的React已经不推荐我们使用ref string转而使用ref callback
+   只能为类组件定义ref属性，而不能为函数组件定义ref属性，
+   需求，如果要在父组件中获取子组件的dom元素，可以采用inputRef  采用函数组件
+
+   一、
+   class AutoFocus extends Component {
+      render() {
+        return (
+          <div>
+            <input type="text" ref={this.props.inputRef}  />
+          </div>
+        )
+      }
+    }
+    <AutoFocus ref={ input => this.inputElement = input } />
+    ref在组件上使用 获取的是组件实例- 必须是class组件 如果不想在用class组件可以采用以下方法
+
+   二、
+    const AutoFocus = () => {
+      return <div>
+          <input type="text" ref={props.inputRef}  />
+        </div>
+    }
+    <AutoFocus inputRef={ el => this.inputElement = el } /> 
+      
+
+# ReactDOM.findDOMNode 查找组件render中的所有的dom
+
+# children   弹框 
+   this.props.children
+  <Dialog>
+    <h1> hello world </h1>
+  </Dialog>
+
+# 组件通信之 兄弟组件通信 context
+
+ 当两个组件不是父子关系但有相同的父组件时候，称为兄弟组件。这里的兄弟组件在整个组件树上并不一定处于同一层级。
+
+
+
