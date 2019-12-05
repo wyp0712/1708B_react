@@ -9,12 +9,12 @@ class ShopCart extends Component {
           list.map((item, index) => {
             return (
               <div key={index}>
-
                 <input type="checkbox" 
                   checked={item.isCheck}
                   onChange={() => this.handleCheckItem(index)}
                 />
-
+                <span className="imgs">  <img src={item.img} /> </span>
+               
                 <span className="goods"> {item.price* item.num} {item.title} </span>
                 <span className="cart">
                   <span className="remove" onClick={() => this.handleRemove(index)}>-</span>
@@ -31,7 +31,6 @@ class ShopCart extends Component {
   }
 
   handleCheckItem = (index) => {
-    // console.log(index, 'index')
     const { checkItemEvent } = this.props
     checkItemEvent(index)
   }

@@ -239,9 +239,28 @@ componentWillUnmount() // 在组件从 DOM 中移除之前立刻被调用。 事
     <h1> hello world </h1>
   </Dialog>
 
-# 组件通信之 兄弟组件通信 context
+# 组件通信之 兄弟组件通信 context 总结: Context跨级组件传值
 
  当两个组件不是父子关系但有相同的父组件时候，称为兄弟组件。这里的兄弟组件在整个组件树上并不一定处于同一层级。
 
+  1. 创建context对象 var context = React.createContext();
+  2. 传值的组件,利用 Provider 组件传值,值通过value属性指定;
+     注意: 必须将需要接收值的组件包裹在Provider内,这样所有内层组件都可以接收到这个value值.
+    <Context.Provider value={this.state.title}>
+  3. 接收值的组件,利用Consumer 组件接收值,内部是个函数
+      <Context.Consumer>  
+       {
+         (value) => {
+             console.log('Btn接收到了值:', value);
+             /* 不能在这里用setState保存接收的value */
+             /* 否则会死循环 */
+             /* 对于接收到value,一般的处理方式: 立即渲染 */
+             return (
+                 <h2>{value}</h2>
+             );
+         }
+     }
+    </Context.Consumer>
+  
 
 

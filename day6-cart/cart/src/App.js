@@ -1,9 +1,7 @@
 import React, { Component, Fragment } from 'react'
-import { findDOMNode }  from 'react-dom'
 import Dialog from './components/Dialog'
-import InputAutoFocus from './components/InputFocus'
 import ShopCart from './components/Cart'
-
+import { BrowserRouter } from 'react-router-dom'
 class NavItem extends Component {
   render() {
     const { checkAll } = this.props
@@ -13,12 +11,9 @@ class NavItem extends Component {
         </nav>
       )
   }
+
   handleChangeCheckAll = () => {
     const { checkAllEvent, checkAll } = this.props
-    // console.log(checkAll, 'checkall')
-    // this.setState({
-    //   checkAll: checkAll =! checkAll
-    // })
     let flag = checkAll;
     flag = !flag
     checkAllEvent(flag)
@@ -38,17 +33,21 @@ class App extends Component {
           num: 2,
           price: 15,
           title: 'vue',
-          isCheck: false
+          isCheck: false,
+          img: 'https://uimgproxy.suning.cn/uimg1/pcpv/pcpv/iwogh/2019/12/04/21/iwoghBannerPicture/352738605f6141fb9b170d99919ad3cc.png_400w_400h_4e'
         },
         {
           num: 2,
           price: 25,
           title: 'react',
-          isCheck: false
+          isCheck: false,
+          img: 'https://uimgproxy.suning.cn/uimg1/pcpv/pcpv/iwogh/2019/12/04/21/iwoghBannerPicture/94ba1fbd561f46b79ae8d68a6700137d.png_400w_400h_4e'
         }
       ],
       isMask: false,
-      checkAll: false
+      checkAll: false,
+      sureOrClose: '',
+      removeIndex: ''
     }
   }
   render() {
@@ -69,9 +68,45 @@ class App extends Component {
         <ToTalPrice
          price={() => this.totalPrice()} 
         />
-        { this.state.isMask ?  <Dialog ><h1 onClick={ () => this.closeMask()}>我是弹框</h1></Dialog> : "" }
+        { this.state.isMask ?  <Dialog >
+            <h1 onClick={ () => this.closeMask()}>我是弹框</h1>
+            <span className="sure" onClick={ () => this.handleDialogSure() }>确定</span>
+            <span className="close" onClick={ () => this.handleDialogClose() }>取消</span>
+          </Dialog> : "" }
       </div>
     )
+  }
+
+  handleDialogSure = () => {
+    // this.setState({
+    //   sureOrClose: true,
+    //   isMask: false
+    // })
+    const list = [...this.state.list]
+    this.setState(() => ({
+      sureOrClose: true,
+      isMask: false
+    }), () => {
+      // if (this.state.sureOrClose) {
+        console.log('删除数据')
+        let removeFlag = list.some((val, ind) => val.isCheck )
+        console.log(removeFlag, 'removeFlag')
+        removeFlag ? list.splice(this.state.removeIndex, 1) : alert('请选中再删除')
+        this.setState({
+          list: list,
+        })
+        !list.length && this.setState({checkAll: false})
+      // }
+    })
+
+    // console.log(this.state.sureOrClose, 'sureOrClose')
+  }
+
+  handleDialogClose = () => {
+    this.setState({
+      sureOrClose: true,
+      isMask: false
+    })
   }
 
   handleCheckItem = (index) => {
@@ -87,7 +122,7 @@ class App extends Component {
   }
 
   bindCheckAllEvent = (state)  => {
-    console.log(state, 'state---------state')
+    // console.log(state, 'state---------state')
     const list = [...this.state.list]
     list.forEach(item => {
       item.isCheck = state
@@ -108,9 +143,7 @@ class App extends Component {
   }
 
   closeMask = () => {
-    this.setState({
-      isMask: false
-    })
+
   }
 
   handleRemove = (index) => {
@@ -124,6 +157,7 @@ class App extends Component {
       list[index].num--
       this.setState(() => ({
         list: list,
+        removeIndex: index
       }))
     }
     this.totalPrice()
