@@ -1,29 +1,17 @@
-import React from 'react';
-import './App.css';
+import React, { Component } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import ReactRouter from './router/index'
+import FooterBar from './components/FooterBar'
 
-import Context from './utils/index'
-import List from './components/List'
 
-class App extends React.Component {
-  constructor(props) {
-     super(props)
-
-     this.state = {
-       title: '你好'
-     }
-  }
-
+class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Context.Provider value={this.state.title}>
-           <List>
-
-           </List>
-        </Context.Provider>
-
-      </div>
-    )
+      <BrowserRouter>
+        <ReactRouter />
+        <FooterBar />
+      </BrowserRouter>
+      )
   }
 }
 

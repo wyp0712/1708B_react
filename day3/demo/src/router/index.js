@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter,Link,Route,Switch} from 'react-router-dom'
+import { BrowserRouter, Link, Route, Switch} from 'react-router-dom'
 
 const styles = {
   width: '100px',
