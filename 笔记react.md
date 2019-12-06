@@ -292,7 +292,8 @@ export default Title
 注意 : 必须将需要接收值的组件包裹在Provider内,
 这样所有内层组件都可以接收到这个value值. < Context.Provider value = {
     this.state.title
-} > 3. 接收值的组件,
+} > 
+3. 接收值的组件,
 利用Consumer 组件接收值,
 内部是个函数 < Context.Consumer > {
     (value) => {
@@ -306,11 +307,6 @@ export default Title
     }
 } < /Context.Consumer>
   
-
-
-
-
-
 
 # 路由：
   ## 安装 yarn add react-router-dom ; npm install react-router-dom
@@ -336,13 +332,14 @@ export default Title
     } > 点击确定 < /button>
         </Fragment >)
     }
+
   ## detail
     class Detail extends Component {
       render() {
         return (
           <Fragment>
             <a href='/'>DETAIL-page</a>
-    < /Fragment>
+          </Fragment>
         )
       }
 
@@ -352,16 +349,18 @@ export default Title
       }
     }
 
-    class RouterApp extends React.Component {
+    class ReactRouter extends React.Component {
       render() {
         return (
           <Fragment>
+
             <nav>
               <span><Link to='/home '>首页</Link></span>
               <span><Link to='/detail'>详情页</Link> < /span>
             </nav>
+
             <Switch>
-              <Route exact path='/' component={Home}></Route>
+              <Route path='/home' component={Home}></Route>
               <Route path='/detail' component={Detail}></Route>
             </Switch> 
           </Fragment>
@@ -369,7 +368,7 @@ export default Title
       }
     }
 
-    class RouterSample extends React.Component {
+    class App extends React.Component {
       render() {
         return (
           <BrowserRouter>
@@ -377,7 +376,7 @@ export default Title
           </BrowserRouter>)
       }
     }
-    export default RouterSample;
+    export default App;
 
  ## 嵌套路由
   
@@ -396,3 +395,25 @@ export default Title
   path= /posts/react
   path= /posts/vue
       
+
+
+# match : 当url和Route匹配时候，Route会创建一个match对象作为props中的一个属性传递给被渲染的组件
+   match: {
+     params: 参数，
+     isExact: 布尔值，完全匹配为true,部分匹配为false
+     path:构建嵌套路由会使用到
+     url: URL的匹配部分
+   }
+
+# component 
+   component的值是一个组件，当url和Route匹配的时候，component属性定义的组件会被渲染，
+
+   <Route path="/foo" component={Foo} > 
+
+# render: 
+  render的值是一个函数，这个函数返回一个React元素，这种方式可以方便的为待渲染的组件传递额外的属性。
+
+  <Route path='foo' render={(props)=>{
+    <Foo {...props} data={extraProps}>
+  }} >    
+  Foo组件接收了一个额外的属性。
