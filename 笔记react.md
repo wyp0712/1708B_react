@@ -132,91 +132,92 @@ handleClick() {}() => this.handleClick()
 
 3. 函数定义时候采用箭头函数形式 Es7语法：属性初始化语法
 
-### 定义 共享父级作用域 指向当前对象
-handleClick = () => {}
+    ### 定义 共享父级作用域 指向当前对象
+    handleClick = () => {}
 
-### 调用 - > 不传参数 < button onClick = {
-    this.handleClick
-} > </button>
-### 调用 - > 传参数 < button onClick = {
-    () => this.handleClick(index)
-} > </button>
+    ### 调用 - > 不传参数 < button onClick = {
+        this.handleClick
+    } > </button>
+    ### 调用 - > 传参数 < button onClick = {
+        () => this.handleClick(index)
+    } > </button>
 
-# mockjs
-## 接口 get 匹配 post 匹配 ‘post’
-## 参数 qs 支持es6模块化的一个包 querystring 只支持CommonJS模块化规范的包。require(‘querystring’)
-## 模拟数据
-const type = ['数据', '人口']
-var data = Mock.mock({
-    'list|10': [
-        {
-            "id|+1": 1,
-            "username": '@ctitle',
-            'password': '@word',
-            'age|18-30': 1,
-            'name': '@cname',
-            'sex|1-1': true,
-            'type|+1': type
+    # mockjs
+    ## 接口 get 匹配 post 匹配 ‘post’
+    ## 参数 qs 支持es6模块化的一个包 querystring 只支持CommonJS模块化规范的包。require(‘querystring’)
+    ## 模拟数据
+    import qs from 'qs'
+    const type = ['数据', '人口']
+    var data = Mock.mock({
+        'list|10': [
+            {
+                "id|+1": 1,
+                "username": '@ctitle',
+                'password': '@word',
+                'age|18-30': 1,
+                'name': '@cname',
+                'sex|1-1': true,
+                'type|+1': type
+            }
+        ]
+    })
+
+    
+    Mock.mock('/api/tab', 'post', function (options) {
+        console.log(JSON.parse(options.body))
+    })
+    Mock.mock(/\.*/, function (res) {
+        // console.log(res.url.split('?')[1])
+        console.log(qs.parse(res.url.split('?')[1]), 'res')
+    })
+    Mock.mock('/api/tab', tabData)
+
+  # qs 是一个增加了一些安全性的查询字符串解析和序列化字符串的库。
+
+  qs.parse()
+  qs.stringify()
+
+  # ref 操作dom
+
+  ## 在DOM元素上使用ref
+  ref接收一个回调函数作为值，在组件被挂载或卸载时候，回调函数会被调用，
+  1. 在组件被挂载时，回调函数会接收当前DOM元素作为参数；
+  2. 在组件被卸载时候，回调函数会接收null作为参数；
+
+  ## 在组件上使用ref 获取组件实例
+  ref的回调函数接收的参数是当前 - 组件的实例 - ，这提供了一种在组件外部操作组件的方式。
+
+    ## 注意：
+    新版本的React已经不推荐我们使用ref string转而使用ref callback
+    只能为类组件定义ref属性，而不能为函数组件定义ref属性，
+    需求，如果要在父组件中获取子组件的dom元素，可以采用inputRef 采用函数组件
+
+    一、
+    class AutoFocus extends Component {
+        render() {
+            return (
+                <div>
+                    <input type="text" ref={this.props.inputRef}/>
+                </div>
+            )
         }
-    ]
-})
+    } < AutoFocus ref = {
+        input => this.inputElement = input
+    } /> ref在组件上使用 获取的是组件实例 - 必须是class组件 如果不想在用class组件可以采用以下方法
 
-import qs from 'qs'
-Mock.mock('/api/tab', 'post', function (options) {
-    console.log(JSON.parse(options.body))
-})
-Mock.mock(/\.*/, function (res) {
-    // console.log(res.url.split('?')[1])
-    console.log(qs.parse(res.url.split('?')[1]), 'res')
-})
-Mock.mock('/api/tab', tabData)
+    二、
+    const AutoFocus = () => {
+        return <div>
+            <input type="text" ref={props.inputRef}/>
+        </div>
+    } < AutoFocus inputRef = {
+        el => this.inputElement = el
+    } /> # ReactDOM.findDOMNode 查找组件render中的所有的dom
 
-# qs 是一个增加了一些安全性的查询字符串解析和序列化字符串的库。
-
-qs.parse()
-qs.stringify()
-
-# ref 操作dom
-
-## 在DOM元素上使用ref
-ref接收一个回调函数作为值，在组件被挂载或卸载时候，回调函数会被调用，
-1. 在组件被挂载时，回调函数会接收当前DOM元素作为参数；
-2. 在组件被卸载时候，回调函数会接收null作为参数；
-
-## 在组件上使用ref 获取组件实例
-ref的回调函数接收的参数是当前 - 组件的实例 - ，这提供了一种在组件外部操作组件的方式。
-
-## 注意：
-新版本的React已经不推荐我们使用ref string转而使用ref callback
-只能为类组件定义ref属性，而不能为函数组件定义ref属性，
-需求，如果要在父组件中获取子组件的dom元素，可以采用inputRef 采用函数组件
-
-一、
-class AutoFocus extends Component {
-    render() {
-        return (
-            <div>
-                <input type="text" ref={this.props.inputRef}/>
-            </div>
-        )
-    }
-} < AutoFocus ref = {
-    input => this.inputElement = input
-} /> ref在组件上使用 获取的是组件实例 - 必须是class组件 如果不想在用class组件可以采用以下方法
-
-二、
-const AutoFocus = () => {
-    return <div>
-        <input type="text" ref={props.inputRef}/>
-    </div>
-} < AutoFocus inputRef = {
-    el => this.inputElement = el
-} /> # ReactDOM.findDOMNode 查找组件render中的所有的dom
-
-# children 弹框
-this.props.children < Dialog > <h1>
-    hello world
-</h1> < /Dialog>
+    # children 弹框
+    this.props.children < Dialog > <h1>
+        hello world
+    </h1> < /Dialog>
 
 # 组件通信之 兄弟组件通信 context 总结: Context跨级组件传值
    当两个组件不是父子关系但有相同的父组件时候，称为兄弟组件。这里的兄弟组件在整个组件树上并不一定处于同一层级。
@@ -235,50 +236,50 @@ this.props.children < Dialog > <h1>
   ## App.js
     import React from 'react'
     import List from './components / List '
- import Context from './utils/index'
+    import Context from './utils/index'
 
-class App extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            title: 'hell react!'
+    class App extends React.Component {
+        constructor(props) {
+            super(props)
+            this.state = {
+                title: 'hell react!'
+            }
+        }
+        render() {
+            return <div>
+                <Context.Provider value={this.state.title}>
+                    <List></List>
+                </Context.Provider>
+            </div>
         }
     }
-    render() {
-        return <div>
-            <Context.Provider value={this.state.title}>
-                <List></List>
-            </Context.Provider>
-        </div>
+    export default App;
+
+    ## List.js
+    import React from 'react'
+    import Title from './Title'
+    class List extends React.Component {
+        render() {
+            return <div>
+                <Title></Title>
+            </div>
+        }
     }
-}
-export default App;
 
-## List.js
-import React from 'react'
-import Title from './Title'
-class List extends React.Component {
-    render() {
-        return <div>
-            <Title></Title>
-        </div>
-    }
-}
+      export default List
+      ## Title.js
+      import React, {Component} from 'react'
+      import Context from '../utils/index'
 
-export default List
-## Title.js
-import React, {Component} from 'react'
-import Context from '../utils/index'
-
-class Title extends Component {
-    render() {
-        return <span>
-            <Context.Consumer>
-                {(val) => {
-                    console.log(val, '我是app传下来的值')
-                    return <h1>{val}</h1>
-                }
-}
+      class Title extends Component {
+          render() {
+              return <span>
+                  <Context.Consumer>
+                      {(val) => {
+                          console.log(val, '我是app传下来的值')
+                          return <h1>{val}</h1>
+                      }
+      }
             </Context.Consumer>
         </span>
     }

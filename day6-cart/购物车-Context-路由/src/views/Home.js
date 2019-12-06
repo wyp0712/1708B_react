@@ -10,6 +10,7 @@ const Home = ({routes, match}) => {
   return (
     <div className="home">
       home
+      <a href='/detail/1'>跳转详情页面</a>
       {/* <Link to="/home/tab1">tab1</Link>
       <Link to="/home/tab2">tab2</Link>
       <RouterView routes={routes}/> */}

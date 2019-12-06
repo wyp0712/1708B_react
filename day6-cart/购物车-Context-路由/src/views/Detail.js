@@ -1,7 +1,10 @@
 import React from 'react'
 
-const Detail = () => {
-  return <div>Detail</div>
+const Detail = (props) => {
+  // console.log(props, 'props')
+  const { match, location, history } = props
+  console.log(match.params, 'mathc')
+  return <div>{match.params.id}</div>
 }
 
 export default Detail
