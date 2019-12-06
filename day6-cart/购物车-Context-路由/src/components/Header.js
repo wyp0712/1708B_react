@@ -5,7 +5,9 @@ class Header extends Component {
     const { isCheckAll } = this.props
     return <div >
       <input  type="checkbox" checked={isCheckAll} onChange={ () => this.handleCheckAllEvent() }/> 
-      购物车 </div>
+       购物车 
+      <hr />
+      </div>
   }
 
   handleCheckAllEvent = () => {

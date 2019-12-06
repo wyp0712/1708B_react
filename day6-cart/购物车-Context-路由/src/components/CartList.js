@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 class CartList extends Component {
 
   render() {
+    console.log(this.props, 'prop------list')
     const { list } = this.props
     return (
       <div className="cart-box">
@@ -10,14 +11,14 @@ class CartList extends Component {
             list.map((item, index) => {
               return (
                 <div className="goods" key={index}>
-                  <input type="checkbox" 
-                   checked={item.isCheck} 
-                   onChange={ () => this.handleCheckItemEvent(index)  } 
+                  <input type="checkbox"
+                    checked={item.isCheck} 
+                    onChange={ () => this.handleCheckItemEvent(index)  } 
                   />
-                  <span className="img"> <img src={item.img} /> </span>
-                  <span className="title"> {item.title}  {item.num} </span>
+                  <span className="img"> <img alt='' src={item.img} /> </span>
+                  <span className="title"> {item.title} {item.num * item.price}  </span>
                   <span className="remove" onClick={ () => this.handleChildRemove(index)}> - </span>
-                  <span className="num"> {item.num * item.price} </span>
+                  <span className="num"> {item.num}  </span>
                   <span className="add" onClick={ () => this.handleChildAdd(index) }> + </span>
                 </div>
               )

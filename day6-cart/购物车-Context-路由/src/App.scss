@@ -1,33 +1,87 @@
 
 
 html,body {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 }
-
-html {
-  font-size: calc(100 / 750 * 100vw);
+input {
+  width: 40px;
+  height: 40px;
+  border:1px solid black;
 }
+.dialog {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left:0;
+  top:0;
+  .mask {
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .6;
+    position: absolute;
+    left: 0;
+    top:0;
+  }
+  .tip {
+    width: 80%;
+    height: 60%;
+    background: #fff;
+    position: absolute;
+    left:50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    span {
+      display: inline-block;
+      width: 100px;
+      height: 45px;
+      border-radius: 4px;
+      background: #ccc;
+      margin: 5px;
+      padding: 5px;
+      text-align: center;
+      line-height: 45px;
+    }
+  }
+}
+.App {
+  width: 100%;
+  user-select: none;
 
-.App-page {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  font-size: 14px;
-  .header {
+}
+.cart-box {
+  width: 100%;
+  cursor: pointer;
+  .goods {
     width: 100%;
-    height: .9rem;
-    background: red;
-  }
-  .main {
-    flex:1;
-    width: 100%;
-    overflow: auto;
-  }
-  .footer {
-    width: 100%;
-    height: .9rem;
-    background: red;
+    span {
+      display: inline-block;
+    }
+    .img {
+      width: 100px;
+      height: 100px;
+      margin: 5px;
+      padding: 5px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .title {
+      width: 60px;
+      height: 45px;
+      text-align: center;
+      line-height: 45px;
+    }
+    .remove, .add, .num {
+      width: 35px;
+      height: 35px;
+      border-radius: 4px;
+      background: #ccc;
+      margin: 5px;
+      text-align: center;
+      line-height: 35px;   
+    }
   }
 }
