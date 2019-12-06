@@ -311,7 +311,6 @@ export default Title
 
 # 路由：
   ## 安装 yarn add react-router-dom ; npm install react-router-dom
-  
   ## 创建文件夹 router  index.js
   import { BrowserRouter, Link, Route, Switch } from 'react-router-dom'
 
@@ -399,10 +398,10 @@ export default Title
 
 
 # match : 当url和Route匹配时候，Route会创建一个match对象作为props中的一个属性传递给被渲染的组件
-   match: {
+   match: {   
      params: 参数，
      isExact: 布尔值，完全匹配为true,部分匹配为false
-     path:构建嵌套路由会使用到
+     path: 构建嵌套路由会使用到
      url: URL的匹配部分
    }
 
@@ -418,3 +417,44 @@ export default Title
     <Foo {...props} data={extraProps}>
   }} >    
   Foo组件接收了一个额外的属性。
+
+
+# 路由封装：引入App.js  <RouterView routes={config.routes}>
+    ## config.js:
+
+    export default {
+      routes: [
+        {
+          path: '/home',
+          component: Home,
+        },
+        {
+          path: '/book',
+          component: Book
+        },
+        {
+          path: '/detail/:id',
+          component: Detail
+        }
+      ]
+    }
+    
+    index.js:
+    import React from 'react'
+    import { Switch, Route, Redirect } from 'react-router-dom'
+
+    export default (props) => {
+      return (
+        <Switch>
+          {
+            props.routes.map((item, index) => {
+              return (
+                <Route key={index} path={item.path} component={item.component}></Route>
+              )
+            })
+          }
+          <Redirect to='/home'/>
+        </Switch>
+      )
+    }
+  
