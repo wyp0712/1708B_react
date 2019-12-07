@@ -457,4 +457,13 @@ export default Title
         </Switch>
       )
     }
-  
+
+
+# 高阶组件  class  函数：
+    
+    function HightComponent(WrappComponent) {
+
+      return <WrappComponent />
+    }
+
+ eg: 通过高阶组件分的方式，使一个非受控组件变为受控组件   

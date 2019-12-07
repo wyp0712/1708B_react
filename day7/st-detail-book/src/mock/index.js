@@ -34,6 +34,7 @@ Mock.mock('/api/list', data.list)
 // 详情接口
 Mock.mock(/\/api\/detail\?\.*/, function(options) {
   const { id } = qs.parse(options.url.split('?')[1])
+  console.log({...id}, 'id------id')
   return data.list.filter(val => val.id === Number(id))
 })
 

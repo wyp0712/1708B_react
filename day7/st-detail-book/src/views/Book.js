@@ -1,32 +1,42 @@
-import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
-import axios from 'axios'
 
-axios.get('/api/search', {
-  params: {
-    type: '明'
-  }
-}).then(res => {
-  console.log(res, 'res----book')
-})
+import React from 'react'
 
-export default class componentName extends Component {
-  static propTypes = {
+function withOnChange(WrappedComponent) {
+  // console.log(WrappedComponent, 'WrappedComponent')
+  return class extends React.Component {
+      constructor(props) {
+          super(props);
+          this.state = {
+              name: '',
+          };
+      }
 
-  }
+      onChange = (e) => {
+        console.log(this.props, 'oprops')
+        const { inputValueFn, item } = this.props;
+          this.setState({
+              name: e.target.value,
+          });
+          inputValueFn(this.state.name)
+          // console.log(inputValueFn, item);
+      }
 
-  render() {
-    
-    return (
-      <div>
-         book
-      </div>
-    )
-  }
-  UNSAFE_componentWillMount() {
-    console.log('componentDidMount,-------will')
-  }
-  componentDidMount() {
-    console.log('componentDidMount-----Book')
-  }
+
+      render() {
+          const newProps = {
+              name: {
+                  value: this.state.name,
+                  onChange: this.onChange,
+              },
+          };
+          return <WrappedComponent {...this.props} {...newProps} />;
+      }
+  };
 }
+
+// 
+
+const NameInput = props => (<input name="name" {...props.name} />);
+
+
+export default withOnChange(NameInput);
