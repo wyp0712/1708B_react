@@ -6,12 +6,11 @@ class BtnCom extends React.Component {
     return <div>
       <Context.Consumer>
         {
-          (value, callback) => {
+          (value) => {
             console.log('Btn接收到了值:', value);
             /* 不能在这里用setState保存接收的value */
             /* 否则会死循环 */
             /* 对于接收到value,一般的处理方式: 立即渲染 */
-            callback('hello world')
             return (
               <h2>{value}</h2>
             )
