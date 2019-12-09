@@ -2,9 +2,8 @@ import React from 'react'
 /** 复用复杂逻辑  */
 /** 展示型组件  */
 /* value  onChange   属性代理  */
-/*  react-redux conect()()()()  */
 
-const HightComponent = (options) => (WrappInput) => {
+function HightComponent(WrappInput) {
   return class extends React.Component {
     constructor(props) {
       super(props)
@@ -22,7 +21,6 @@ const HightComponent = (options) => (WrappInput) => {
         inputFn(this.state.inputValue)
       })
     }
-
     render() {
        const newProps = {
          name: {
@@ -36,31 +34,8 @@ const HightComponent = (options) => (WrappInput) => {
 }
 
 /* ui组件 */
-
 const InputDom = (props) => {
   // console.log(props, 'props')
   return <input type="text"  {...props.name} />
 }
-const selecDom = (props) => {
-  // console.log(props, 'props')
-  return <select type=""  {...props.name} >
-<option value={props.value}>{props.value}</option>
-  </select>
-}
-
-const InputDom = (props) => {
-  // console.log(props, 'props')
-  return <input type="text"  {...props.name} />
-}
-
-HightComponent({})(InputDom)
-
-HightComponent({})(selecDom)
-
-
-/* fn('can1', 'can2, 'can3') */
-
-/** fn('can1)('can'2)('can3')  */
-
-
-export default HightComponent({})(InputDom)
+export default HightComponent(InputDom)

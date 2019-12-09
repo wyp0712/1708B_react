@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 
-export default class Detail extends Component {
+export default class homeTab1 extends Component {
   static propTypes = {
 
   }
+
   render() {
     return (
       <div>
-        详情
+         tab1
       </div>
     )
   }

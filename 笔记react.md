@@ -1,3 +1,5 @@
+# {/* 码敲十遍，其义自现 */}
+
 # JSX 奇怪的HTML JS
 
 1. javascript 的语法 扩展
@@ -142,7 +144,7 @@ handleClick() {}() => this.handleClick()
         () => this.handleClick(index)
     } > </button>
 
-    # mockjs
+# mockjs
     ## 接口 get 匹配 post 匹配 ‘post’
     ## 参数 qs 支持es6模块化的一个包 querystring 只支持CommonJS模块化规范的包。require(‘querystring’)
     ## 模拟数据
@@ -172,12 +174,12 @@ handleClick() {}() => this.handleClick()
     })
     Mock.mock('/api/tab', tabData)
 
-  # qs 是一个增加了一些安全性的查询字符串解析和序列化字符串的库。
+# qs 是一个增加了一些安全性的查询字符串解析和序列化字符串的库。
 
   qs.parse()
   qs.stringify()
 
-  # ref 操作dom
+# ref 操作dom
 
   ## 在DOM元素上使用ref
   ref接收一个回调函数作为值，在组件被挂载或卸载时候，回调函数会被调用，
@@ -415,7 +417,7 @@ export default Title
 
   <Route path='foo' render={(props)=>{
     <Foo {...props} data={extraProps}>
-  }} >    
+  }} >
   Foo组件接收了一个额外的属性。
 
 
@@ -466,4 +468,149 @@ export default Title
       return <WrappComponent />
     }
 
- eg: 通过高阶组件分的方式，使一个非受控组件变为受控组件   
+  eg: 通过高阶组件分的方式，使一个非受控组件变为受控组件   
+
+
+# 二级路由 导航守卫：
+/**
+ *  
+ * @function [设置二级路由，不能有exact确切路由，采用render方式渲染] 
+ * 路由渲染方式两种：
+ * @param { <Route path="" component={} > </Route> }
+ * @param { <Route path="" render={props=> { <Component /> || <item.component />  }} >  
+ * 
+ * 
+ */
+  ## 导航守卫组件
+  class RouterGuard extends React.Component {
+    render() {
+      console.log(this.props)
+      const { component:Component, ...otherProps } = this.props
+      return (
+        <Route {...otherProps} render={props => {
+          return (
+            false ?  // 判断是否登陆
+            <Component {...props}/> : 登陆就渲染组件
+            <Redirect to='/login'/>   没有登陆就跳转到登陆页面
+          )
+        }} />
+      )
+    }
+  }
+  ## 二级路由 - 路由渲染函数
+  class RouterView extends React.Component {
+  render() {
+    return (
+      <Switch>
+        {/* 码敲十遍，其义自现 */}
+        {
+          this.props.routes.map((item, index) => {
+            return (
+              <Route key={index} path={item.path} render={props => {
+                  const {component: Component} = item
+                  if (item.children) {
+                   return <Component {...props} routes={item.children}/>
+                  } else {
+                   // 判断是否有需要验证权限的路由
+                    if(item.requireAuth) {
+                        return <RouterGuard {...item} {...props}/>
+                      } else {
+                        return <Component {...props} />
+                      }
+                    }
+                }}>
+                </Route>
+              )
+            })
+          }
+        </Switch>
+      )
+    }
+  }
+
+
+
+# mock配置文件：
+import Mock from 'mockjs'
+import axios from 'axios'
+import qs from 'qs'
+const data = Mock.mock({
+  'list|10': [{
+    'id': '@id',  
+    'title|+1': '@ctitle(3)',
+    'name|+1': '@cname',
+    'color': '@color',
+    'city': '@city',
+    'price': '@natural(1,100)',
+    'num': '@integer(1,10)',
+    'count': 0,
+    'country': '@county(true)',
+    'img': '@img(100x100,@color)',
+  }],
+  'carousel|5': [{
+    'img': '@img(375x150,@color)',
+  }]
+})
+// console.log(data, 'data')
+const { carousel, list } = data
+
+// 列表接口
+Mock.mock('/api/list', list)
+// 轮播图接口
+Mock.mock('/api/carousel', carousel)
+// 详情接口
+Mock.mock(/\/api\/detail\?\.*/, function(params) {
+  const { id } = qs.parse(params.url.split('?')[1])
+  return list.filter(val => val.id === Number(id))
+})
+// tab切换接口
+
+const configLogin = [{
+  username: 'devin',
+  password: '123'
+}]
+// 登陆接口
+Mock.mock('/api/login', 'post', function(params) {
+  // console.log(JSON.parse(params.body), '')
+  const { username, password } = JSON.parse(params.body)
+  // console.log(username, password, '-------')
+  const loginFlag = configLogin.some(item => item.username === username && item.password === password)
+
+  if (loginFlag) {
+    return {
+      errCode: 0,
+      msg: 'success',
+      token: `hanting_${username}_${Date.now()}`
+    }
+  } else {
+    return {
+      errCode: -1,
+      msg: 'fail'
+    }
+  }
+
+})
+
+axios.get('/api/list').then(res => {
+  // console.log(res.data, 'list----list')
+})
+
+axios.get('/api/carousel').then(res => {
+  // console.log(res.data, 'carousel----list')
+})
+
+axios.get('/api/detail?id=210000198506026255').then(res => {
+  // console.log(res.data, 'detail')
+})
+
+axios.post('/api/login', {
+  username: 'devin',
+  password: '123'
+}).then(res => {
+  // console.log(res.data, 'carousel----list')
+  if(res.data.errCode === 0) {
+    localStorage.setItem('token', res.data.token)
+  }
+})
+
+ 
