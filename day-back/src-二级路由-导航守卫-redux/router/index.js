@@ -7,7 +7,7 @@ const auth = {
 
 
 const RouterGuard = (props) => {
-  // console.log(props, '-------')
+
   const { component: Component, ...otherProps } = props
   console.log(Component, otherProps)
 
@@ -15,7 +15,7 @@ const RouterGuard = (props) => {
     <Route {...otherProps} render={ props => {
       return (
         auth.isLogin ?
-        <Component {...props}/>:
+        <Component {...props} />:
         <Redirect to='/login' {...props}/>
       )  
     }} />

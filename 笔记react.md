@@ -417,7 +417,7 @@ export default Title
 
   <Route path='foo' render={(props)=>{
     <Foo {...props} data={extraProps}>
-  }} >
+  }}/>
   Foo组件接收了一个额外的属性。
 
 
@@ -612,5 +612,19 @@ axios.post('/api/login', {
     localStorage.setItem('token', res.data.token)
   }
 })
+
+
+# 二级路由 ：  match history location  <RouterView routes={config}>
+  ## 当有二级路由的时候，不能有确定 重定向路径
+  ## 此时重定向路径必须跳转到当前页面的某个二级路由下 <Redirect to={`{match}/tab1` } >
+  ## 一旦才用这种形式：必须将导航路由信息传入到当前组件中 {...props}， 
+     <img src="">
+  
+  ## 再通过标签传回来<RouterView  {...props} routes={config}>
+  ##  { props.match &&  <Redirect to={ `${props.match.path}/tab1` }/> }
+
+
+## mock下接口的正则写法：
+
 
  
