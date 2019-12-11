@@ -615,6 +615,7 @@ axios.post('/api/login', {
 
 
 # 二级路由 ：  match history location  <RouterView routes={config}>
+  
   ## 当有二级路由的时候，不能有确定 重定向路径
   ## 此时重定向路径必须跳转到当前页面的某个二级路由下 <Redirect to={`{match}/tab1` } >
   ## 一旦才用这种形式：必须将导航路由信息传入到当前组件中 {...props}， 
