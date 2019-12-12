@@ -628,4 +628,16 @@ axios.post('/api/login', {
 ## mock下接口的正则写法：
 
 
+# redux  
+
+   index.js          store初始化文件
+   reducer.js        处理数据的地方
+   actionCreator.js  生成action
+
+
+# redux-thunk     redux-thunk": "^2.3.0",
+
+   用来在reducer中使用异步函数的；
+
+
  
