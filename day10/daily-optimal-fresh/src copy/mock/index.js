@@ -19,6 +19,15 @@ var data = Mock.mock({
     ]
 })
 
+var datas = Mock.mock({
+  'pro|10': [
+      {
+        'count': '@county(true)',
+        'province': '@province',
+        'city': '@city'
+      }
+  ]
+})
 
 // 列表接口
 Mock.mock('/api/list', data.list)

@@ -9,6 +9,7 @@ import RouterView from './router/index'
 import config from './router/config'
 // 样式模块化
 import styled from 'styled-components';
+import store from './store/index'
 
 const AppWrapper = styled.div`
    width:100vw;
@@ -31,17 +32,34 @@ const MainDiv = styled.main`
 `;
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = store.getState();
+    this.fn = store.subscribe(() => this.storeEvent())
+    // console.log(this.fn, 'fn---')
+  }
+
+  storeEvent = () => {
+    this.setState(store.getState())
+  }
+
+  // 卸载生命周期
+  componentWillUnmount() {
+    this.fn() // 卸载监听订阅函数
+  }
   render() {
     return (
       <AppWrapper>
         <BrowserRouter>
-          <HeaderDiv primary>我是头部</HeaderDiv>
+        { console.log(this.state, 'state------state') }
+        { this.state.isShowHeader &&  <HeaderDiv primary>我是头部</HeaderDiv> }
+          {/* <HeaderDiv primary>我是头部</HeaderDiv> */}
+
           <MainDiv>
              <RouterView routes={config}></RouterView>
-
           </MainDiv>
-
-          <FooterBar></FooterBar>
+        { this.state.isShowHeader && <FooterBar />}
+          
         </BrowserRouter>
       </AppWrapper>
     );
