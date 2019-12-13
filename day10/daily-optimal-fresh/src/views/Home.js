@@ -1,89 +1,62 @@
 import React, { Component } from 'react'
 import store from '../store/index'
-import {
-          getAddCartItem,
-          getRemoveCartItem,
-          initCartList
-         } from '../store/actionCreator'
-         
-// import HomeList from '../components/HomeList'
 
-export default class Home extends Component {
+export default class componentName extends Component {
+
   constructor(props) {
     super(props)
-    this.state = store.getState() // 获取redux中的数据
-    this.fn = store.subscribe(() => this.hanleStoreEvent() ) // 返回值用来接收监听
+    this.state = store.getState() // 拿到store中的数据  
+    this.fn = store.subscribe(() => this.storeEvent()) // 监听store中的数据
   }
 
-  hanleStoreEvent = () => {
-    this.setState(store.getState())
+  storeEvent = () => {
+    this.setState(store.getState()) // 设置数据
   }
- 
-  // 卸载的生命周期
-  componentWillUnmount() {
-    this.fn() // 取消监听
+
+  componentWillUnmount() { // 取消监听
+    this.fn()
   }
 
   render() {
-    // 一旦数据更新，就会重新执行render()
-    const { list, rightList } = this.state;
     return (
-      <div className="inland">
-        <div className="left">
-          {
-            list.inland && list.inland.map((item,index) => {
-              return <span onClick={ () => this.handleTabClick(index) } key={index}>{item.pro}</span>
-            })
-          }
-        </div>
-        <div className="right">
-           { rightList.map((item, index) => {
-              return <span key={index}>{item.city}</span>
-            })
+      <div>
+        <input
+           value={this.state.inputValue} 
+           onChange={ (e) => this.handleInputChange(e) } /> 
+           <button onClick={ () => this.handleBtnClick() }>确定</button>
+         <ul>
+           {
+             this.state.list.map((item, index) => {
+               return <li onClick={ () => this.handleDeleteClick(index) } key={index}>{item}</li>
+             })
            }
-        </div>
+          </ul>
       </div>
     )
   }
 
-  handleTabClick = (index) => {
-    const data = this.state.list.inland[index].children
+  // 把所有原先基于事件的操作都变为action  ajax
+  handleInputChange = (e) => {
+    const value = e.target.value;
     const action = {
-      type: 'get_right_list',
-      data
+      type: 'init_input_value',
+      value
     }
     store.dispatch(action)
   }
 
-  componentDidUpdate() {
-
-  }
-  
-  // 请求数据
-  componentDidMount() { // 在当前组件中，这个只执行一次，但是路由切换之后每次都会调用
-    console.log('componentDidMount')
-    // action  init_cart_list  // 数据都教给redux去管理修改
-    if (!this.state.list.length) {
-      const action = initCartList()
-      store.dispatch(action)
+  handleBtnClick = () => {
+    const action = {
+      type: 'add_input_value',
     }
-
-    // this.handleTabClick(this.state.list.inland[0].children)
-
-
-    // console.log(this.state.list.inland, 'inland')
-  }
-
-  // ++
-  hanleAddEvent = (index) => {
-    const action = getAddCartItem(index)
-    store.dispatch(action)
-  }
-  
-  // --
-  handleRemoveEvent = (index) => {
-    const action = getRemoveCartItem(index)
     store.dispatch(action)
   }
 
+  handleDeleteClick = (index) => {
+    const action = {
+      type: 'remove_input_value',
+      index
+    }
+    store.dispatch(action)
+  }
 }

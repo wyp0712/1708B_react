@@ -42,6 +42,7 @@ const RouterView = (props) => {
           )
         })
       }
+      {props.match && <Redirect to={`${props.match.path}`} />}
     </Switch>
   )
 }

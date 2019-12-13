@@ -2,23 +2,8 @@ import qs from 'qs'
 import Mock from 'mockjs'
 
 // const type = ['首页', '排行', '分类']
-const alpha = [
-  'a',
-  'b',
-  'c',
-  'd',
-  'e','f','g','h', 'i', 'j','k','l','m','n','o','p','q',
-  'r','s','t','u','v','w','x','y','z'
-]
+
 var data = Mock.mock({
-    'city|26': [
-      {
-        'alpha|+1': alpha,
-        'city|10-20': [ {
-          'city': '@city',
-        }]
-      }
-    ],
     'inland|12': [
         {
           'id|+1': 1,
@@ -38,17 +23,7 @@ var data = Mock.mock({
         }
     ]
 })
-
-data.city.sort((a, b) => {
-  if(a>b) {
-    return 1
-  } else if (a<b) {
-    return -1
-  } else {
-    return 0
-  }
-})
-console.log(data.city)
+console.log(data, 'data')
 
 // 列表接口
 Mock.mock('/api/list', data)

@@ -5,7 +5,6 @@ const auth = {
   isLogin: false
 }
 
-
 const RouterGuard = (props) => {
 
   const { component: Component, ...otherProps } = props
@@ -15,7 +14,7 @@ const RouterGuard = (props) => {
     <Route {...otherProps} render={ props => {
       return (
         auth.isLogin ?
-        <Component {...props} />:
+        <Component {...props} /> :
         <Redirect to='/login' {...props}/>
       )  
     }} />

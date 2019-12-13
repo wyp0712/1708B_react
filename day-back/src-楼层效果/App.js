@@ -7,7 +7,7 @@ import RouterView from './router/index'
 import config from './router/config'
 // 样式模块化
 import styled from 'styled-components';
-import { Provider } from 'react-redux'
+// import { Provider } from 'react-redux'
 // import store from './store/index'
 
 class App extends Component {

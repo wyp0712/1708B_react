@@ -6,6 +6,7 @@ import React from 'react'
 /* 组件 <Route path="/home" compponent={home}></Route> */
 /* 渲染 <Route path="/cart" render={ props => {
 } }  */
+
 /**
  * 
  * @param {RouterGuard} 导航守卫组件：进入判断登陆与否
@@ -32,16 +33,26 @@ const RouterView = (props) => {
       {
         props.routes.map((item, index) => {
           return (
+            // component={}  render={}
             <Route key={index} path={item.path} render={props => {
               if (item.children) { // 有二级路由 就传递给组件内部 重新走一遍RouterView组件最终渲染的的逻辑都走了else
                 return <item.component {...props}  routes={item.children} />
               } else { // 渲染一级
                 return <item.component {...item} {...props} />
+                // if (item.requireAuth) {
+                // 需要守卫   // true: cart false:   
+                //   return <RouterGuard {...item} {...props} />
+                // return <item.component {...props} />
+                // } else {
+                // 直接渲染
+                //   return <item.component {...item} {...props} />
+                // }
               }
             }} />
           )
         })
       }
+      {props.match && <Redirect to={`${props.match.path}`} />}
     </Switch>
   )
 }

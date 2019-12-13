@@ -8,7 +8,7 @@ import config from './router/config'
 // 样式模块化
 import styled from 'styled-components';
 import { Provider } from 'react-redux'
-// import store from './store/index'
+import store from './store/index'
 
 class App extends Component {
   constructor(props) {
@@ -17,15 +17,15 @@ class App extends Component {
 
   render() {
     return (
-      // <Provider store={store}>
+      <Provider store={store}>
         <AppWrapper>
           <BrowserRouter>
-            <MainDiv className="main">
+            <MainDiv>
               <RouterView routes={config}></RouterView>
             </MainDiv>
           </BrowserRouter>
         </AppWrapper>
-      // </Provider>
+      </Provider>
     );
   }
 
