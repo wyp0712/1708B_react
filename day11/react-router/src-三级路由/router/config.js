@@ -1,6 +1,5 @@
 import Home from '../views/Home/Home'
 import Cart from '../views/Cart/Cart'
-import Detail from '../views/Detail/Detail'
 
 import User from '../views/Cart/pages/user'
 import Info from '../views/Cart/pages/info'
@@ -12,14 +11,12 @@ const routes = [
   {
     path: '/home',
     component: Home,
-  },
-  {
-    path: '/detail/:id',
-    component: Detail,
+    isHeader: true,
   },
   {
     path: '/cart',
     component: Cart,
+    redirect: '/cart/user',
     children: [
       {
         path: '/cart/user',
