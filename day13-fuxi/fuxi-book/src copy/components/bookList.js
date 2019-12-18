@@ -1,25 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class BookList extends Component {
-  render() {
-    const { bookData } = this.props;
+const BookList = (props) => {
+    const { bookData } = props;
+    // console.log(bookData, 'bookData')
     return (
       <div className="book-list">
         {
           bookData.map((item, index) => {
             return (
               <ul key={item.id}>
-                <li> <img src={item.img} alt=''/> </li>
+                <li> <img onClick={ () => { props.detailEvent(item) } }  src={item.img} alt=''/> </li>
                 <li> {item.name} </li>
+                <li> <span onClick={ () => props.addEvent(index) } className="add-btn">+</span> </li>
               </ul>
             )
           })
         }
       </div>
     )
-  }
-
-  shouldComponentUpdate(nextProps) {
-    return true
-  }
 }
+
+export default BookList
