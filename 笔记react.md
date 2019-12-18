@@ -1,11 +1,42 @@
 # {/* 码敲十遍，其义自现 */}
 
-# JSX 奇怪的HTML JS
 
+# JSX 奇怪的HTML JS
 1. javascript 的语法 扩展
-2. 可以使用花括号 {}
+2. 可以使用花括号 {}  js  (html)
 内嵌js表达式
 3. jsx属性 data - index = "index" 自定义属性
+
+// 
+class app extends Component {
+  render() {
+    <div>
+      {
+        this.list.map(item=> {
+          return (
+            <li></li>
+          )
+        })
+      }
+    </div>
+  }
+}
+
+// 
+function app() {
+  return (
+    <div>
+      {
+        this.list.map(item=> {
+          return (
+            <li></li>
+          )
+        })
+      }
+    </div>
+  )
+}
+
 
 jsx被编译为什么？
 
@@ -22,13 +53,19 @@ setup props and state
 
 ## Mounting
 componentWillMount()
+
 render()
-componentDidMount()
+
+componentDidMount()  mounted:
 
 ## Updation
 
 ### props : componentWillReceiveProps()
-shouldComponentUpdate()
+shouldComponentUpdate()  {
+  return true 
+} 
+
+
 true false
 componentWillUpdate()
 render()
@@ -47,8 +84,11 @@ import PropTypes from 'prop-types';
 
 class App extends Component {
     // 声明成静态属性，意味着从类外面也可以访问他们。App.propTypes  App.defaultProps
-    static propTypes = {}
+    static propTypes = {
+    }
+
     static defaultProps = {}
+
     constructor(props) {
         super(props)
 
@@ -72,6 +112,8 @@ React.createClass // 已经废弃
 
 # props state 与render函数的关系
 当组件的state或者props发生改变的时候，render函数就会被重新执行
+
+
 
 # 项目目录划分：
 
