@@ -626,6 +626,8 @@ axios.post('/api/login', {
 
 
 ## mock下接口的正则写法：
+   get接口走正则匹配
+   post接口正常写
 
 
 # redux  
