@@ -1,13 +1,11 @@
 # {/* 码敲十遍，其义自现 */}
 
-
 # JSX 奇怪的HTML JS
 1. javascript 的语法 扩展
 2. 可以使用花括号 {}  js  (html)
 内嵌js表达式
 3. jsx属性 data - index = "index" 自定义属性
 
-// 
 class app extends Component {
   render() {
     <div>
