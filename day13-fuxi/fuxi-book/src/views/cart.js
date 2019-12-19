@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Dialog from '../components/dialog'
 
-import { removeCartFn, addCartFn } from '../store/actionCreator'
+import { removeCartFn, addCartFn,getDialogMsg } from '../store/actionCreator'
 
 class BookRack extends Component {
   state = {
@@ -49,7 +49,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addCart(index) {
-      console.log(index, 'index----index')
       const action = addCartFn(index)
       dispatch(action)
     },
@@ -59,11 +58,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     dialogEvent(index) {
       // 0 确定 1 取消
-      console.log(index, 'index')
-      const action = {
-        type: 'dialog_msg',
-        index
-      }
+      const action = getDialogMsg(index)
       dispatch(action)
     }
   }

@@ -11,14 +11,18 @@ import './mock/index'
 // 单项数据流 props
 // class render必须存在的  TodoList 
 class TodoList extends Component {
+
   static propTypes = {
   }
+
   static defaultProps = {
   }
+
   // 组件挂载之前
   UNSAFE_componentWillMount() {
     console.log('UNSAFE_componentWillMount. ') 
   }
+
   constructor(props) {
     super(props)
     // 初始化数据

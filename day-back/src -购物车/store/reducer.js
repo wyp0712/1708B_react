@@ -32,10 +32,9 @@ export const reducerName = (state = defaultState, action) => {
   // ++
   if (action.type === 'add_cart') {
     newState.goodsList[action.index].count++
-
     return newState;
   }
-  
+
   // -- 
   if (action.type === 'remove_cart') {
     if (newState.goodsList[action.index].count <=1) {

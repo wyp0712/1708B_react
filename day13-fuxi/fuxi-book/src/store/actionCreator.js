@@ -22,6 +22,11 @@ export const removeCartFn = (index) => ({
   index
 })
 
+export const getDialogMsg = (index) => ({
+  type: 'dialog_msg',
+  index
+}) 
+
 // redux-thunk
 export const getInitCartList = () => {
   return (dispatch) => {
