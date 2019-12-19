@@ -4,9 +4,9 @@ import qs from 'qs'
 const data = Mock.mock({
   'bookList|20': [
     {
-      'img': '@image(150x200, @color, @ctitle)',
+      'img': '@image(150x200, @color, @city)',
       'id': '@id',
-      'name': 1 + '@cname',
+      'name': 1 + '@city',
       'isCheck': false,
       'des': '@cword(25)',
       'count': 0,

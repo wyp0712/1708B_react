@@ -5,9 +5,9 @@ export default class componentName extends Component {
   render() {
     return (
       <div className="app-footer">
-        <NavLink to='/book'>书架</NavLink>
-        <NavLink to='/store'>书店</NavLink>
-        <NavLink to='/find'>找书</NavLink>
+        <NavLink to='/home'>首页</NavLink>
+        <NavLink to='/classify'>分类</NavLink>
+        <NavLink to='/cart'>购物车</NavLink>
         <NavLink to='/mine'>我的</NavLink>
       </div>
     )

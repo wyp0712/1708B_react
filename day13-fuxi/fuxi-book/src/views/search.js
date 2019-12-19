@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import axios from 'axios'
-import '../mock/index'
 
 const BackBox = (props) => {
   return <div className="icon" onClick={ () => { props.history.go(-1) } }>icon</div>
@@ -9,16 +7,16 @@ const BackBox = (props) => {
 
 class SearchPage extends Component {
   render() {
-    const { searchVal, inputChange, searchList, handleSearchClick } = this.props
+    // const { searchVal, inputChange, searchList, handleSearchClick } = this.props
     return (
       <div className="search-page">
         <BackBox {...this.props}/>
-        <input
+        {/* <input
          value={searchVal}
          onChange={inputChange}
-        />
+        /> */}
         
-        <ul>
+        {/* <ul>
           { searchList.map((item, index) => {
               return <li key={item.id}>
                 <img src={item.img} alt=''/>
@@ -30,7 +28,7 @@ class SearchPage extends Component {
                    </span>}
                 </li>
             }) }
-        </ul>
+        </ul> */}
       </div>
     )
   }
@@ -38,43 +36,43 @@ class SearchPage extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    searchVal: state.searchVal,
-    searchList: state.searchList
+    // searchVal: state.searchVal,
+    // searchList: state.searchList
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    inputChange(e) {
-      const value = e.target.value;
-      const action = {
-        type: 'init_search_value',
-        value
-      }
-      dispatch(action)
+    // inputChange(e) {
+    //   const value = e.target.value;
+    //   const action = {
+    //     type: 'init_search_value',
+    //     value
+    //   }
+    //   dispatch(action)
 
-      if (value) {
-        axios.get('/api/search',{
-          params: {
-            type: value
-          } 
-        }).then(res => {
-          const data = res.data
-          const action = {
-            type: 'init_search_list',
-            data
-          }
-          dispatch(action)
-        })
-      }
-    },
-    handleSearchClick(item) {
-      const action = {
-        type: 'add_search',
-        item
-      }
-      dispatch(action)
-    }
+    //   if (value) {
+    //     axios.get('/api/search',{
+    //       params: {
+    //         type: value
+    //       } 
+    //     }).then(res => {
+    //       const data = res.data
+    //       const action = {
+    //         type: 'init_search_list',
+    //         data
+    //       }
+    //       dispatch(action)
+    //     })
+    //   }
+    // },
+    // handleSearchClick(item) {
+    //   const action = {
+    //     type: 'add_search',
+    //     item
+    //   }
+    //   dispatch(action)
+    // }
   }
 }
 

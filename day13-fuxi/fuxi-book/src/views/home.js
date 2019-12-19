@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
-import SwiperComponent from '../components/swiper'
-import BookList from '../components/bookList'
 import { connect } from 'react-redux'
-
-import axios from 'axios'
-import '../mock/index'
-
-import { getInitCartList,toCartFn } from '../store/actionCreator'
+import { getInitCartList } from '../store/actionCreator'
+import BookList from '../components/bookList'
 
 const IconBox = (props) => {
   return <div className="icon" onClick={ () => { props.history.push('/search') } }>back</div>
@@ -14,14 +9,12 @@ const IconBox = (props) => {
 
 class BookStore extends Component {
   render() {
-    const { bookData, bindAddEvent } = this.props
+    const { cartData } = this.props;
     return (
       <div className="book-store">
         <IconBox {...this.props}></IconBox>
-        <SwiperComponent /> 
         <BookList
-          addEvent = { (item) => { bindAddEvent(item) } }
-          bookData={bookData}
+          cartData={cartData}
           detailEvent={ (item) => { this.props.history.push(`/detail/${item.id}`) } }
         />
       </div>
@@ -36,7 +29,7 @@ class BookStore extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    bookData: state.bookData
+    cartData: state.cartData
   }
 }
 
@@ -44,13 +37,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getBookListData() {
       const action = getInitCartList()
-      dispatch(action)
-      // axios.get('/api/book').then(res => {
-        // const data = res.data
-      // })
-    },
-    bindAddEvent(item) {
-      const action = toCartFn(item) 
       dispatch(action)
     }
   }

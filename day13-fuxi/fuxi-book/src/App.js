@@ -12,16 +12,14 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <BrowserRouter>
-        <div className="app">
-
-          <main className='main'>
-             <div className="content">
-              <RouterView routes={config}></RouterView> 
-             </div>
-          </main>
-
-          <FooterBar />
-        </div>
+          <div className="app">
+            <main className='main'>
+              <div className="content">
+                <RouterView routes={config}></RouterView> 
+              </div>
+            </main>
+            <FooterBar />
+          </div>
         </BrowserRouter>
       </Provider>
     )

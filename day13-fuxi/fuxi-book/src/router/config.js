@@ -1,6 +1,6 @@
-import Book from '../views/bookrack'
-import BookStore from '../views/bookstore'
-import FindBook from '../views/find'
+import Cart from '../views/cart'
+import Home from '../views/home'
+import Classify from '../views/classify'
 import Detail from '../views/detail'
 import Login from '../views/login'
 import Mine from '../views/mine'
@@ -15,30 +15,30 @@ const routes = [
     redirect: '/book'
   },
   {
-    path: '/book',
-    component: Book
+    path: '/home',
+    component: Home
+  },
+  {
+    path: '/cart',
+    component: Cart
   },
   {
     path: '/search',
     component: SearchCom
   },
   {
-    path: '/store',
-    component: BookStore
-  },
-  {
-    path: '/find',
-    component: FindBook,
+    path: '/classify',
+    component: Classify,
     children: [
       {
-        redirect: '/find/findtab1'
+        redirect: '/classify/findtab1'
       },
       {
-        path: '/find/findtab1',
+        path: '/classify/findtab1',
         component: Findtab1
       },
       {
-        path: '/find/findtab2',
+        path: '/classify/findtab2',
         component: Findtab2,
       }
     ]
