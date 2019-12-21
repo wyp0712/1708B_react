@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import SwiperComponent from '../components/swiper'
+// import SwiperComponent from '../components/swiper'
 import BookList from '../components/bookList'
 import { connect } from 'react-redux'
 
@@ -16,7 +16,7 @@ class BookStore extends Component {
     return (
       <div className="book-store">
         <IconBox {...this.props}></IconBox>
-        <SwiperComponent /> 
+        {/* <SwiperComponent />  */}
         <BookList
           bookData={bookData}
           detailEvent={ (item) => { this.props.history.push(`/detail/${item.id}`) } }

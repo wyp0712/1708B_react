@@ -3,12 +3,39 @@ const defaultState = {
   goodsList: [], // 购物车加入的数据
   isShowDialog: false,
   removeIndex: '', // 删除数据下标
-  detailData: []
+  detailData: [],
+  houseArr: [], // 房子数据
+  closeFlag: false,
 }
 
 export const reducerName = (state = defaultState, action) => {
   // 拷贝数据  修改数据  返回确定数据
   const newState = JSON.parse(JSON.stringify(state))
+
+  // 数据过滤
+  if (action.type === 'filter_data') {
+    // newState.cartData.forEach((val) => {
+    //   val.isCheck 
+    // })
+    newState.cartData.filter((val, index) => {
+        val.isCheck = false
+       if (!val.area.includes(action.item)) {
+         val.isCheck = true
+       }
+    })
+    // console.log(newState.cartData, 'arr')
+    return newState
+  }
+
+  if (action.type === 'init_house_data') {
+    newState.houseArr = action.data;
+    return newState;
+  }
+
+  if (action.type === 'close_dialog') {
+    newState.closeFlag = action.flag
+    return newState
+  }
 
   if (action.type === 'init_Cart_data') {
     newState.cartData = action.data;
