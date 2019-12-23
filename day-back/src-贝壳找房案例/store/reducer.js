@@ -37,20 +37,12 @@ export const reducerName = (state = defaultState, action) => {
 
   // 数据过滤
   if (action.type === 'filter_data') {
-    // 1
     newState.cartData.filter((val, index) => {
-        val.isCheck = false;
-        if (!val.area.includes(action.item)) {
-          val.isCheck = true
-        }
+       val.isCheck = false;
+       if (!val.area.includes(action.item)) {
+         val.isCheck = true
+       }
     })
-
-    // 2
-
-    // 3
-
-    // 4
-
     // 数据过滤完之后关闭弹出框
     newState.closeFlag = false;
     // 关闭弹出框后，让tab切换都置为空
@@ -88,9 +80,6 @@ export const reducerName = (state = defaultState, action) => {
   // 关闭弹出框
   if (action.type === 'close_dialog') {
     newState.closeFlag = action.flag
-    newState.navList.forEach(item => {
-      item.isClick = false;
-    })
     return newState
   }
 

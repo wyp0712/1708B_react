@@ -8,7 +8,6 @@ class BookRack extends Component {
   state = {
     msgBtn: ['确定','取消']
   }
-
   render() {
     const { goodsList, addCart, removeCart,dialogEvent,isShowDialog } = this.props;
     return (
@@ -33,21 +32,10 @@ class BookRack extends Component {
              </li>
           </ul>
         }) }
-
-        <div className="total-btn"> 
-         { this.getTotalPrice() }
-        元</div>
+        <div className="total-btn">  元 </div>  
       </div>
     )
   }
-
-  getTotalPrice = () => {
-    return this.props.goodsList.reduce((n, next) => {
-      return n + next.count * next.price
-    }, 0)
-  } 
-
-
 
 }
 
@@ -57,7 +45,7 @@ const mapStateToProps = (state) => {
     isShowDialog: state.isShowDialog // 控制dialog是否出现
   }
 }
-// 反是带action的写到这儿
+
 const mapDispatchToProps = (dispatch) => {
   return {
     addCart(index) {

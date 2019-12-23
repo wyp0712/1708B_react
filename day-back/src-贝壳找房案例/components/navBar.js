@@ -8,33 +8,7 @@ import BScroll from 'better-scroll'
 // console.log(province, 'province')
 class NavBar extends Component {
   state = {
-    navList: [
-      {
-        name: '区域',
-        isClick: false
-      },
-      {
-        name: '价格',
-        isClick: false
-      },
-      {
-        name: '房型',
-        isClick: false
-      },
-      {
-        name: '更多',
-        isClick: false
-      },
-      {
-        name: '排序',
-        isClick: false
-      }
-    ],
-    tabIndex: 1,
-    flag: false, // 控制dialog
-    // houseArr: [],s
     value: null,
-    scroll: null,
   }
 
   render() {
@@ -61,7 +35,8 @@ class NavBar extends Component {
             /> }
           </Dialog>)
         }
-
+        
+        {/* tab切换 */}
         <div className="nav-tag">
           <div className="nav-tag-content">
               {

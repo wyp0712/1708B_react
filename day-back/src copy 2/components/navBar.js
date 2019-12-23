@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Dialog from './dialog'
 import { connect } from 'react-redux'
-import axios from 'axios'
-import { PickerView } from 'antd-mobile';
+import axios from './node_modules/axios'
+import { PickerView } from './node_modules/antd-mobile';
 import { province } from './dataCity'
 import BScroll from 'better-scroll'
 // console.log(province, 'province')
