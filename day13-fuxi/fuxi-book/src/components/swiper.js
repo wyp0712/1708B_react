@@ -13,7 +13,7 @@ class SwiperCom extends Component {
       <div className="swiper-container">
         <div className="swiper-wrapper">
              {
-               carouselData.map(item => {
+              carouselData && carouselData.map(item => {
                  return (
                    <div key={item.id} className="swiper-slide">
                      <img src={item.img} alt=''/>

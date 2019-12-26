@@ -12,22 +12,22 @@ class DetailCom extends Component {
     const { addBookStore,detailData} = this.props
     return (
       <div className="detail-page">
-        <BackBox {...this.props} />
+        {/* <BackBox {...this.props} /> */}
         {
-          detailData.map((item) => {
-            return <ul key={item.id}>
-              <li>
-                <img src={item.img} alt={item.name}/><br/>
-              </li>
-              <li> 
-                <span style={{display: 'inline-block',textAlign: 'left'}}>{item.des}</span> 
-                <span
-                  onClick={() => addBookStore(item)} 
-                  className={ item.isCheck ? 'show detail-btn' :'hide detail-btn' } > 
-                  { item.isCheck ? '已加入' :'加入书架' } 
-                </span> </li>
-            </ul>
-          })
+          // detailData.map((item) => {
+          //   return <ul key={item.id}>
+          //     <li>
+          //       <img src={item.img} alt={item.name}/><br/>
+          //     </li>
+          //     <li> 
+          //       <span style={{display: 'inline-block',textAlign: 'left'}}>{item.des}</span> 
+          //       <span
+          //         onClick={() => addBookStore(item)} 
+          //         className={ item.isCheck ? 'show detail-btn' :'hide detail-btn' } > 
+          //         { item.isCheck ? '已加入' :'加入书架' } 
+          //       </span> </li>
+          //   </ul>
+          // })
         }
       </div>
     )
@@ -37,8 +37,8 @@ class DetailCom extends Component {
     // 获取参数id 并且把id传递给dispatch中的函数
     const id = this.props.match.params.id;
     console.log(id, 'id-----详情id')
-    const { getDetail } = this.props;
-    getDetail(id)
+    // const { getDetail } = this.props;
+    // getDetail(id)
   }
 }
 

@@ -13,6 +13,7 @@ class BookRack extends Component {
     const { goodsList, addCart, removeCart,dialogEvent,isShowDialog } = this.props;
     return (
       <div className="bookrack-page">
+       <div className="input-check"> <input type="checkbox"/> 计算总价 </div>
 
        { isShowDialog && <Dialog>
           { this.state.msgBtn.map((item, index) => {
@@ -22,6 +23,7 @@ class BookRack extends Component {
 
         { goodsList.map((item, index) => {
           return <ul key={index}>
+            <li> <input type="checkbox" />  </li>
             <li> <img src={item.img} alt=''/> </li> 
             <li>
               <div className="goods-name">{item.name}</div> 
@@ -45,10 +47,7 @@ class BookRack extends Component {
     return this.props.goodsList.reduce((n, next) => {
       return n + next.count * next.price
     }, 0)
-  } 
-
-
-
+  }
 }
 
 const mapStateToProps = (state) => {

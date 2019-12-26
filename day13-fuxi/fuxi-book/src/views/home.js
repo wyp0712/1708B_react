@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import BookList from '../components/bookList'
 
-import { 
+import {
         getInitCartList,
-        toCartFn 
+        toCartFn
       } from '../store/actionCreator'
 
 const IconBox = (props) => {
@@ -20,6 +20,7 @@ class BookStore extends Component {
         <BookList
           cartData={cartData}
           addEvent = {(item) => toCart(item) }
+          {...this.props}
         />
       </div>
     )
